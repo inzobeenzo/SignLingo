@@ -22,7 +22,7 @@ def save_result(result: vision.GestureRecognizerResult, output_image: mp.Image, 
 
 def run():
     global latest_gesture, latest_hand_landmarks
-    base_options = python.BaseOptions(model_asset_path="gesture_recognizer.task")
+    base_options = python.BaseOptions(model_asset_path="models/gesture_recognizer.task")
     options = vision.GestureRecognizerOptions(base_options=base_options, running_mode=vision.RunningMode.LIVE_STREAM, result_callback=save_result)
     cap = cv.VideoCapture(0)
 
