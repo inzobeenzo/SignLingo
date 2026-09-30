@@ -1,3 +1,7 @@
+"""
+THIS IS A TEST ENVIRONMENT NOT THE REAL SCRIPT
+"""
+
 import numpy as np
 import mediapipe as mp
 import cv2 as cv
