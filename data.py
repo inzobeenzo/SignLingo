@@ -7,9 +7,11 @@ import shutil
 
 cap = cv2.VideoCapture(0)
 results = None
-actions = ["hello", "goodbye", "thank you", "please", "help"]
+actions = ["hello", "goodbye", "thank_you", "please", "help"]
+alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-current_action = "hello"
+delete = False
+current_action = "z"
 current_sequence = 0
 current_frame = 0
 
@@ -40,8 +42,8 @@ def print_result_callback(result, output_image, timestamp_ms):
 
     final_features = np.array(left_features + right_features).flatten()
 
-    # if os.path.exists("data"):
-    #     shutil.rmtree(f"data/{str(current_action)}", ignore_errors=True)
+    if delete and os.path.exists("data"):
+        shutil.rmtree(f"data/{str(current_action)}", ignore_errors=True)
     
     dirs = os.path.join("data", current_action, str(current_sequence))
     os.makedirs(dirs, exist_ok=True)
@@ -79,10 +81,17 @@ if __name__ == "__main__":
             holistic_landmarker.detect_async(mp_image, frame_timestamp)
 
             if current_frame == 30:
+                cap.release()
                 current_frame = 0
                 current_sequence += 1
-                print("break")
-                time.sleep(2)
+                print(current_sequence)
+                time.sleep(0.5)
+                cap = cv2.VideoCapture(0)
+
+            if current_sequence == 30:
+                cap.release()
+                cv2.destroyAllWindows
+                break
 
             if cv2.waitKey(1) == ord('q'):
                 cap.release()
