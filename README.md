@@ -1,6 +1,6 @@
 # Real-Time Sign & Gesture Recognition
 
-An end-to-end pipeline that recognizes hand signs from a live webcam feed and displays them as text in real time. It uses **MediaPipe** to extract hand landmarks from each frame and a **custom-trained Keras LSTM** to classify the gesture from a short sequence of those landmarks.
+An end-to-end pipeline that recognizes hand signs from a live webcam feed and displays them as text in real time. It uses **MediaPipe** to extract hand landmarks from each frame and a **custom-trained Keras LSTM** to classify the gesture (made by either hand) from a short sequence of those landmarks.
 
 Built as a hands-on project to learn real-time computer vision and temporal sequence modeling.
 
@@ -98,6 +98,7 @@ This is a working baseline, not a general sign-language system.
 - **Single-signer data.** The training sequences were collected by one person in one environment. The model recognizes that signer's gestures in that setup well; performance on new people, lighting, or backgrounds is minimally tested and, although seemingly consistent, expected to drop. It has not been validated on a held-out signer.
 - **No scale normalization yet.** Distance to the camera affects the landmark magnitudes; a reference-length scaling step would make it more robust.
 - **Small vocabulary.** 31 classes, and the word-signs are recognized as whole-sequence patterns, not composed grammatically.
+- **Not generalized.** Alphabet and language only based on ASL (American Sign Language) and training data may not contain most accurate representations/gestures.
 
 ---
 
